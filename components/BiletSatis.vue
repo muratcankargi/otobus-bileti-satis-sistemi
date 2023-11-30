@@ -30,7 +30,7 @@
         <input v-model="date" type="date" id="date" name="date" class="mt-1 p-2 border border-gray-300 rounded-md w-full" :min="today" :disabledDates="disabledDates">
       </div>
 
-      <button @click="buyTicket" class="bg-blue-500 text-white p-2 rounded-md w-full">Bilet Satın Al</button>
+      <button @click="searchTicket" class="bg-blue-500 text-white p-2 rounded-md w-full">Bilet Satın Al</button>
     </div>
   </div>
 </template>
@@ -55,7 +55,7 @@ export default {
     };
   },
   methods: {
-    buyTicket() {
+    searchTicket() {
       console.log('Bilet Satın Alındı!');
       this.$router.push('/seferler');
     },
