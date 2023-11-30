@@ -17,7 +17,7 @@
             <td class="px-6 py-4">{{ data.to }}</td>
             <td class="px-6 py-4">{{data.date }}</td>
             <td class="px-6 py-4 text-right">
-              <router-link class="font-medium text-blue-600 dark:text-blue-500 hover:underline" :to="{ path: '/record-process'}">Bilet Al</router-link>
+              <router-link class="font-medium text-blue-600 dark:text-blue-500 hover:underline" :to="{ path: '/rezervasyon'}">Bilet Al</router-link>
             </td>
           </tr>
         </tbody>
