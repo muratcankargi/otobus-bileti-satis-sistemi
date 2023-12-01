@@ -1,13 +1,13 @@
 <template>
     <div>
-        <BiletSatis/>
+        <BiletAra/>
     </div>
 </template>
 <script>
-import BiletSatis from '../components/BiletSatis'
+import BiletAra from '../components/BiletAra'
 export default {
   components: {
-    BiletSatis
+    BiletAra
   }
   }
 </script>
