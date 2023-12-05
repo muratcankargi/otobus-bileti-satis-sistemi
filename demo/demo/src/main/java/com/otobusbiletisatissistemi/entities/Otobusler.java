@@ -3,27 +3,21 @@ package com.otobusbiletisatissistemi.entities;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "Otobusler")
-public class Otobus {
+public class Otobusler {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "Firma_id", nullable = false)
-    private Firma firma;
+    private Firmalar firma;
 
-    @Column(name = "Otobus_plaka", nullable = false)
     private String otobusPlaka;
 
-    @Column(name = "Otobus_kontenjan", nullable = false)
     private Integer otobusKontenjan;
 
-    @Column(name = "Otobus_marka")
     private String otobusMarka;
 
-    @Column(name = "Model_yili")
     private Integer modelYili;
 
     public Long getId() {
@@ -34,11 +28,11 @@ public class Otobus {
         this.id = id;
     }
 
-    public Firma getFirma() {
+    public Firmalar getFirma() {
         return firma;
     }
 
-    public void setFirma(Firma firma) {
+    public void setFirma(Firmalar firma) {
         this.firma = firma;
     }
 

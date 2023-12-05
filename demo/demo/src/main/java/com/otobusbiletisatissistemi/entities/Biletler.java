@@ -5,45 +5,39 @@ import jakarta.persistence.*;
 import java.sql.Date;
 
 @Entity
-@Table(name = "Biletler")
-public class Bilet {
+public class Biletler {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
 
-    @JoinColumn(name = "Yolcu_id",nullable = false)
     @ManyToOne
-    private Yolcu yolcu;
+    private Yolcular yolcu;
 
-    @JoinColumn(name = "Sefer_id", nullable = false)
     @ManyToOne
-    private Sefer sefer;
+    private Seferler sefer;
 
-    @JoinColumn(name = "Koltuk_no", nullable = false)
     private Integer KoltukNo;
 
-    @JoinColumn(name = "Bilet_fiyat", nullable = false)
     private Integer BiletFiyat;
 
-    @JoinColumn(name = "Satis_tarihi", nullable = false)
     private Date SatisTarihi;
-    public Bilet() {
+    public Biletler() {
     }
 
-    public Yolcu getYolcu() {
+    public Yolcular getYolcu() {
         return yolcu;
     }
 
-    public void setYolcu(Yolcu yolcu) {
+    public void setYolcu(Yolcular yolcu) {
         this.yolcu = yolcu;
     }
 
-    public Sefer getSefer() {
+    public Seferler getSefer() {
         return sefer;
     }
 
-    public void setSefer(Sefer sefer) {
+    public void setSefer(Seferler sefer) {
         this.sefer = sefer;
     }
 

@@ -4,24 +4,20 @@ import jakarta.persistence.*;
 
 
 @Entity
-@Table(name = "Firmalar")
-public class Firma {
+public class Firmalar {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "Firma_adi", nullable = false)
     private String firmaAdi;
 
-    @Column(name = "Firma_iletisim")
     private String firmaIletisim;
 
-    @Column(name = "Isletme_alani")
     private String isletmeAlani;
 
 
-    public Firma() {
+    public Firmalar() {
 
     }
 
