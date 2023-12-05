@@ -1,6 +1,6 @@
 package com.otobusbiletisatissistemi.controllers;
 
-import com.otobusbiletisatissistemi.entities.Firma;
+import com.otobusbiletisatissistemi.entities.Firmalar;
 import com.otobusbiletisatissistemi.repositories.FirmaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,7 +16,7 @@ public class FirmaController {
     FirmaRepository firmaRepository;
 
     @GetMapping
-    public List<Firma> getAllFirmalar(){
+    public List<Firmalar> getAllFirmalar(){
         return firmaRepository.findAll();
     }
 }

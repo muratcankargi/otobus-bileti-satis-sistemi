@@ -1,6 +1,6 @@
 package com.otobusbiletisatissistemi.controllers;
 
-import com.otobusbiletisatissistemi.entities.Bilet;
+import com.otobusbiletisatissistemi.entities.Biletler;
 import com.otobusbiletisatissistemi.repositories.BiletRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,7 +16,7 @@ public class BiletController {
     BiletRepository biletRepository;
 
     @GetMapping
-    public List<Bilet> getAllBilet(){
+    public List<Biletler> getAllBilet(){
         return biletRepository.findAll();
     }
 }

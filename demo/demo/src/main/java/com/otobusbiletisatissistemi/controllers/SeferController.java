@@ -1,6 +1,6 @@
 package com.otobusbiletisatissistemi.controllers;
 
-import com.otobusbiletisatissistemi.entities.Sefer;
+import com.otobusbiletisatissistemi.entities.Seferler;
 import com.otobusbiletisatissistemi.repositories.SeferRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,7 +15,7 @@ public class SeferController {
     @Autowired
     SeferRepository seferRepository;
     @GetMapping
-    public List<Sefer> getAllSefer(){
+    public List<Seferler> getAllSefer(){
         return seferRepository.findAll();
     }
 }
