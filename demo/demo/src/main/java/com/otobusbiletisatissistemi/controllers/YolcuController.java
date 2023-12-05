@@ -1,11 +1,9 @@
 package com.otobusbiletisatissistemi.controllers;
 
-import com.otobusbiletisatissistemi.entities.Yolcu;
-import com.otobusbiletisatissistemi.repositories.YolcuRepository;
+import com.otobusbiletisatissistemi.entities.Yolcular;
+import com.otobusbiletisatissistemi.service.YolcuService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -13,11 +11,33 @@ import java.util.List;
 @RequestMapping("/api/yolcular")
 public class YolcuController {
 
+    private final YolcuService yolcuService;
+
     @Autowired
-    private YolcuRepository yolcuRepository;
+    public YolcuController(YolcuService yolcuService) {
+        this.yolcuService = yolcuService;
+    }
 
     @GetMapping
-    public List<Yolcu> getAllYolcular() {
-        return yolcuRepository.findAll();
+    public List<Yolcular> getAllYolcular() {
+        return yolcuService.getAllYolcular();
+    }
+
+    @PostMapping
+    public void createYolcu(@RequestBody Yolcular yolcu) {
+        yolcuService.createYolcu(yolcu);
+    }
+
+    @DeleteMapping(path = "{yolcuId}")
+    public void deleteYolcu(@PathVariable("yolcuId") Long yolcuId) {
+        yolcuService.deleteYolcu(yolcuId);
+    }
+
+    @PutMapping(path = "{yolcuId}")
+    public void updateYolcu(@PathVariable("yolcuId") Long yolcuId,
+                            @RequestParam(required = false) String ad,
+                            @RequestParam(required = false) String soyad,
+                            @RequestParam(required = false) String email) {
+        yolcuService.updateYolcu(yolcuId, ad, soyad, email);
     }
 }
