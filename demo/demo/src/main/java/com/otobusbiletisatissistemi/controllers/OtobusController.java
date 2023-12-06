@@ -1,22 +1,38 @@
 package com.otobusbiletisatissistemi.controllers;
 
 import com.otobusbiletisatissistemi.entities.Otobusler;
-import com.otobusbiletisatissistemi.repositories.OtobusRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import com.otobusbiletisatissistemi.service.OtobusService;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
 @RequestMapping("/api/otobusler")
 public class OtobusController {
-    @Autowired
-    OtobusRepository otobusRepository;
+    private final OtobusService otobusService;
+
+    OtobusController(OtobusService otobusService) {
+        this.otobusService = otobusService;
+    }
 
     @GetMapping
-    public List<Otobusler> gelAllBus(){
-        return otobusRepository.findAll();
+    public List<Otobusler> gelAllBus() {
+        return otobusService.getOtobus();
+    }
+
+    @PostMapping
+    public void createOtobus(@RequestBody Otobusler otobus) {
+        otobusService.createOtobus(otobus);
+    }
+
+    @DeleteMapping(path = "{otobusId}")
+    public void deleteOtobus(@PathVariable("otobusId") Long otobusId) {
+        otobusService.deleteOtobus(otobusId);
+    }
+
+    @PutMapping(path = "{otobusId}")
+    public void updateOtobus(@PathVariable("otobusId") Long otobusId,
+                             @RequestBody Otobusler otobus) {
+        otobusService.updateOtobus(otobusId, otobus);
     }
 }
