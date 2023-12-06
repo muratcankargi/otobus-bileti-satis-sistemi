@@ -23,19 +23,13 @@ public class YolcuService {
         return yolcuRepository.findAll();
     }
 
-    ;
-
     public void createYolcu(Yolcular yolcu) {
         Optional<Yolcular> studentOptional = yolcuRepository.findYolcularByEmail(yolcu.getEmail());
         if (studentOptional.isPresent()) {
             throw new IllegalStateException("email taken");
         }
         yolcuRepository.save(yolcu);
-
-
     }
-
-    ;
 
     public void deleteYolcu(Long yolcuId) {
         boolean exist = yolcuRepository.existsById(yolcuId);
