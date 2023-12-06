@@ -8,16 +8,10 @@ public class Otobusler {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-    @ManyToOne
-    private Firmalar firma;
-
+    private Long firmaId;
     private String otobusPlaka;
-
     private Integer otobusKontenjan;
-
     private String otobusMarka;
-
     private Integer modelYili;
 
     public Long getId() {
@@ -28,13 +22,6 @@ public class Otobusler {
         this.id = id;
     }
 
-    public Firmalar getFirma() {
-        return firma;
-    }
-
-    public void setFirma(Firmalar firma) {
-        this.firma = firma;
-    }
 
     public String getOtobusPlaka() {
         return otobusPlaka;
@@ -66,6 +53,14 @@ public class Otobusler {
 
     public void setModelYili(Integer modelYili) {
         this.modelYili = modelYili;
+    }
+
+    public Long getFirmaId() {
+        return firmaId;
+    }
+
+    public void setFirmaId(Long firmaId) {
+        this.firmaId = firmaId;
     }
 }
 

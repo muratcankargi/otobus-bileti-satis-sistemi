@@ -2,86 +2,79 @@ package com.otobusbiletisatissistemi.entities;
 
 import jakarta.persistence.*;
 
-import java.sql.Date;
+
+import java.time.LocalDateTime;
 
 @Entity
 public class Seferler {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long Sefer_no;
+    private Long seferNo;
 
-    private String Sefer_kalkis_yeri;
+    private String seferKalkisYeri;
 
-    private String Sefer_varis_yeri;
-
-    private Date Sefer_kalkis_saati;
-
-    private Date Sefer_varis_saati;
-
-    @JoinColumn(name = "Firma_id", nullable = false)
-    @ManyToOne
-    private Firmalar Firma_id;
-
-    @JoinColumn(name = "Otobus_id", nullable = false)
-    @ManyToOne
-    private Otobusler Otobus_id;
-
-    public Long getSefer_no() {
-        return Sefer_no;
-    }
+    private String seferVarisYeri;
+    private LocalDateTime seferKalkisSaati;
+    private LocalDateTime seferVarisSaati;
+    private Long firmaId;
+    private Long otobusId;
 
     public Seferler() {
     }
 
-    public void setSefer_no(Long id) {
-        this.Sefer_no = id;
+    public Long getSeferNo() {
+        return seferNo;
     }
 
-    public String getSefer_kalkis_yeri() {
-        return Sefer_kalkis_yeri;
+    public void setSeferNo(Long id) {
+        this.seferNo = id;
     }
 
-    public void setSefer_kalkis_yeri(String sefer_kalkis_yeri) {
-        Sefer_kalkis_yeri = sefer_kalkis_yeri;
+    public String getSeferKalkisYeri() {
+        return seferKalkisYeri;
     }
 
-    public String getSefer_varis_yeri() {
-        return Sefer_varis_yeri;
+    public void setSeferKalkisYeri(String seferKalkisYeri) {
+        this.seferKalkisYeri = seferKalkisYeri;
     }
 
-    public void setSefer_varis_yeri(String sefer_varis_yeri) {
-        Sefer_varis_yeri = sefer_varis_yeri;
+    public String getSeferVarisYeri() {
+        return seferVarisYeri;
     }
 
-    public Date getSefer_kalkis_saati() {
-        return Sefer_kalkis_saati;
+    public void setSeferVarisYeri(String seferVarisYeri) {
+        this.seferVarisYeri = seferVarisYeri;
     }
 
-    public void setSefer_kalkis_saati(Date sefer_kalkis_saati) {
-        Sefer_kalkis_saati = sefer_kalkis_saati;
+    public LocalDateTime getSeferKalkisSaati() {
+        return seferKalkisSaati;
     }
 
-    public Date getSefer_varis_saati() {
-        return Sefer_varis_saati;
+    public void setSeferKalkisSaati(LocalDateTime seferKalkisSaati) {
+        this.seferKalkisSaati = seferKalkisSaati;
     }
 
-    public void setSefer_varis_saati(Date sefer_varis_saati) {
-        Sefer_varis_saati = sefer_varis_saati;
+    public LocalDateTime getSeferVarisSaati() {
+        return seferVarisSaati;
     }
 
-    public Firmalar getFirma_id() {
-        return Firma_id;
+    public void setSeferVarisSaati(LocalDateTime seferVarisSaati) {
+        this.seferVarisSaati = seferVarisSaati;
     }
 
-    public void setFirma_id(Firmalar firma_id) {
-        this.Firma_id = firma_id;
+    public Long getFirmaId() {
+        return firmaId;
     }
 
-    public Otobusler getOtobus_id() {
-        return Otobus_id;
+    public void setFirmaId(Long firmaId) {
+        this.firmaId = firmaId;
     }
 
-    public void setOtobus_id(Otobusler otobus_id) {
-        this.Otobus_id = otobus_id;
+    public Long getOtobusId() {
+        return otobusId;
+    }
+
+    public void setOtobusId(Long otobusId) {
+        this.otobusId = otobusId;
     }
 }
