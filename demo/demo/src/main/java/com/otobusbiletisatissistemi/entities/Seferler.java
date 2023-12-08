@@ -1,5 +1,6 @@
 package com.otobusbiletisatissistemi.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 
@@ -16,6 +17,10 @@ public class Seferler {
     private String seferVarisYeri;
     private LocalDateTime seferKalkisSaati;
     private LocalDateTime seferVarisSaati;
+    @ManyToOne
+    private Firmalar firma;
+    @Transient
+    @JsonIgnore
     private Long firmaId;
     private Long otobusId;
 
@@ -62,19 +67,27 @@ public class Seferler {
         this.seferVarisSaati = seferVarisSaati;
     }
 
-    public Long getFirmaId() {
-        return firmaId;
-    }
-
-    public void setFirmaId(Long firmaId) {
-        this.firmaId = firmaId;
-    }
-
     public Long getOtobusId() {
         return otobusId;
     }
 
     public void setOtobusId(Long otobusId) {
         this.otobusId = otobusId;
+    }
+
+    public Firmalar getFirma() {
+        return firma;
+    }
+
+    public void setFirma(Firmalar firma) {
+        this.firma = firma;
+    }
+
+    public Long getFirmaId() {
+        return firmaId;
+    }
+
+    public void setFirmaId(Long firmaId) {
+        this.firmaId = firmaId;
     }
 }

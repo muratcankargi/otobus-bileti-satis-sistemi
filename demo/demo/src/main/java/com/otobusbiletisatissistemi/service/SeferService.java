@@ -1,5 +1,6 @@
 package com.otobusbiletisatissistemi.service;
 
+import com.otobusbiletisatissistemi.entities.Firmalar;
 import com.otobusbiletisatissistemi.entities.Seferler;
 import com.otobusbiletisatissistemi.repositories.FirmaRepository;
 import com.otobusbiletisatissistemi.repositories.OtobusRepository;
@@ -8,8 +9,13 @@ import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.util.Date;
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 
 @Service
 public class SeferService {
@@ -34,9 +40,9 @@ public class SeferService {
             throw new IllegalStateException("otobus id " + sefer.getOtobusId() + "not exist");
         }
 
-        boolean firmaExist = firmaRepository.existsById(sefer.getFirmaId());
-        if (!firmaExist) {
-            throw new IllegalStateException("firma id " + sefer.getFirmaId() + "not exist");
+        Optional<Firmalar> firma = firmaRepository.findById(sefer.getFirmaId());
+        if (firma.isPresent()) {
+                sefer.setFirma(firma.get());
         }
 
         seferRepository.save(sefer);
@@ -63,19 +69,19 @@ public class SeferService {
             sefer.setOtobusId(updateSefer.getOtobusId());
         }
 
-        boolean firmaExist = firmaRepository.existsById(updateSefer.getFirmaId());
+        /*boolean firmaExist = firmaRepository.existsById(updateSefer.getFirmaId());
         if (!firmaExist) {
             throw new IllegalStateException("firma id " + updateSefer.getFirmaId() + "not exist");
         } else {
             sefer.setFirmaId(updateSefer.getFirmaId());
-        }
+        }*/
 
-        if (updateSefer.getSeferKalkisYeri() != null && updateSefer.getSeferKalkisYeri().length() > 0 &&
+        if (updateSefer.getSeferKalkisYeri() != null && !updateSefer.getSeferKalkisYeri().isEmpty() &&
                 !Objects.equals(sefer.getSeferKalkisYeri(), updateSefer.getSeferVarisYeri())) {
             sefer.setSeferKalkisYeri(updateSefer.getSeferKalkisYeri());
         }
 
-        if (updateSefer.getSeferVarisYeri() != null && updateSefer.getSeferVarisYeri().length() > 0 &&
+        if (updateSefer.getSeferVarisYeri() != null && !updateSefer.getSeferVarisYeri().isEmpty() &&
                 !Objects.equals(sefer.getSeferVarisYeri(), updateSefer.getSeferVarisYeri())) {
             sefer.setSeferVarisYeri(updateSefer.getSeferVarisYeri());
         }
@@ -90,5 +96,11 @@ public class SeferService {
             sefer.setSeferVarisSaati(updateSefer.getSeferVarisSaati());
         }
 
+    }
+
+    public List<Seferler> getSeferlerByKriter(String nereden, String nereye, LocalDate tarih) {
+        LocalDateTime startOfDay = LocalDateTime.of(tarih, LocalTime.MIN);
+        LocalDateTime endOfDay = LocalDateTime.of(tarih, LocalTime.MAX);
+            return seferRepository.getSeferlerByKriter(nereden,nereye,startOfDay, endOfDay);
     }
 }
