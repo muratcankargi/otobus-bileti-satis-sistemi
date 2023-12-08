@@ -44,11 +44,11 @@ public class FirmaService {
         Firmalar firma = firmaRepository.findById(firmaId).orElseThrow(
                 () -> new IllegalStateException("firma with id " + "does not exist"));
 
-        if (firmaAdi != null && firmaAdi.length() > 0 && !Objects.equals(firma.getFirmaAdi(), firmaAdi)) {
+        if (firmaAdi != null && !firmaAdi.isEmpty() && !Objects.equals(firma.getFirmaAdi(), firmaAdi)) {
             firma.setFirmaAdi(firmaAdi);
         }
 
-        if (firmaIletisim != null && firmaIletisim.length() > 0 && !Objects.equals(firma.getFirmaIletisim(), firmaIletisim)) {
+        if (firmaIletisim != null && !firmaIletisim.isEmpty() && !Objects.equals(firma.getFirmaIletisim(), firmaIletisim)) {
             Optional<Firmalar> firmalarOptional = firmaRepository.findFirmalarByFirmaIletisim(firmaIletisim);
             if (firmalarOptional.isPresent()) {
                 throw new IllegalStateException("email taken");
@@ -56,7 +56,7 @@ public class FirmaService {
             firma.setFirmaIletisim(firmaIletisim);
         }
 
-        if (isletmeAlani != null && isletmeAlani.length() > 0 && !Objects.equals(firma.getIsletmeAlani(), isletmeAlani)) {
+        if (isletmeAlani != null && !isletmeAlani.isEmpty() && !Objects.equals(firma.getIsletmeAlani(), isletmeAlani)) {
             firma.setIsletmeAlani(isletmeAlani);
         }
     }

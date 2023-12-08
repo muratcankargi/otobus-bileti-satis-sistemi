@@ -44,15 +44,15 @@ public class YolcuService {
         Yolcular yolcu = yolcuRepository.findById(yolcuId).orElseThrow(
                 () -> new IllegalStateException("student with id " + yolcuId + "does not exist"));
 
-        if (ad != null && ad.length() > 0 && !Objects.equals(yolcu.getAd(), ad)) {
+        if (ad != null && !ad.isEmpty() && !Objects.equals(yolcu.getAd(), ad)) {
             yolcu.setAd(ad);
         }
 
-        if (soyad != null && soyad.length() > 0 && !Objects.equals(yolcu.getSoyad(), soyad)) {
+        if (soyad != null && !soyad.isEmpty() && !Objects.equals(yolcu.getSoyad(), soyad)) {
             yolcu.setSoyad(soyad);
         }
 
-        if (email != null && email.length() > 0 && !Objects.equals(yolcu.getEmail(), email)) {
+        if (email != null && !email.isEmpty() && !Objects.equals(yolcu.getEmail(), email)) {
             Optional<Yolcular> yolcuOptional = yolcuRepository.findYolcularByEmail(email);
 
             if (yolcuOptional.isPresent()) {

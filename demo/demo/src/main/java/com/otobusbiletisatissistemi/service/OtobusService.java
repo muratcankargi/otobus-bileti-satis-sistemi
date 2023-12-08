@@ -29,7 +29,7 @@ public class OtobusService {
 
     public void createOtobus(Otobusler otobus) {
         Optional<Firmalar> optionalFirmalar = firmaRepository.findById(otobus.getFirmaId());
-        if (!optionalFirmalar.isPresent()) {
+        if (optionalFirmalar.isEmpty()) {
             throw new IllegalStateException("firma id " + otobus.getFirmaId() + " not found");
         }
 
@@ -59,7 +59,7 @@ public class OtobusService {
             otobus.setFirmaId(otobus.getFirmaId());
         }
 
-        if (updateOtobus.getOtobusPlaka() != null & updateOtobus.getOtobusPlaka().length() > 0) {
+        if (updateOtobus.getOtobusPlaka() != null & !updateOtobus.getOtobusPlaka().isEmpty()) {
             Optional<Otobusler> optionalOtobusler = otobusRepository.findOtobuslerByOtobusPlaka(
                     updateOtobus.getOtobusPlaka());
             if (optionalOtobusler.isPresent()) {
@@ -72,7 +72,7 @@ public class OtobusService {
             otobus.setOtobusKontenjan(updateOtobus.getOtobusKontenjan());
         }
 
-        if (updateOtobus.getOtobusMarka() != null && updateOtobus.getOtobusMarka().length() > 0) {
+        if (updateOtobus.getOtobusMarka() != null && !updateOtobus.getOtobusMarka().isEmpty()) {
             otobus.setOtobusMarka(updateOtobus.getOtobusMarka());
         }
 
