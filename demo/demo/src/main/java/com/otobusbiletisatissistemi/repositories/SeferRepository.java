@@ -22,4 +22,17 @@ public interface SeferRepository extends JpaRepository<Seferler,Long> {
             @Param("startDate") LocalDateTime startOfDay,
             @Param("endDate") LocalDateTime endOfDay
     );
+
+    /*@Query("SELECT b.id AS Bilet_id, b.yolcuId, b.seferId, b.KoltukNo, b.BiletFiyat, b.SatisTarihi\n" +
+            "FROM Biletler b\n" +
+            "JOIN Seferler s ON b.seferId = s.seferNo\n" +
+            "WHERE s.seferKalkisYeri = :nereden \n" +
+            "  AND s.seferVarisYeri = :nereye \n" +
+            "  AND s.seferKalkisYeri >= :tarih\n" +
+            "  AND s.seferKalkisSaati <= :tarih")
+    List<Seferler> getSeferAndBiletFiyat(
+            @Param("nereden") String nereden,
+            @Param("nereye") String nereye,
+            @Param("tarih") LocalDateTime dateTime
+    );*/
 }

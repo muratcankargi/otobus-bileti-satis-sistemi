@@ -103,4 +103,10 @@ public class SeferService {
         LocalDateTime endOfDay = LocalDateTime.of(tarih, LocalTime.MAX);
             return seferRepository.getSeferlerByKriter(nereden,nereye,startOfDay, endOfDay);
     }
+
+   /* public List<Seferler> getSeferAndBiletFiyat(String nereden, String nereye, LocalDate tarih) {
+        LocalDateTime dateTime = LocalDateTime.of(tarih, LocalTime.MIN);
+        return seferRepository.getSeferAndBiletFiyat(nereden,nereye,dateTime);
+
+    }*/
 }

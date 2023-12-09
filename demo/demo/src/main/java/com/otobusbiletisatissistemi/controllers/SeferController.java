@@ -81,4 +81,13 @@ public class SeferController {
 
         return seferService.getSeferlerByKriter(nereden, nereye, tarih);
     }
+
+   /* @PostMapping("/getSeferAndBiletFiyat")
+    public List<Seferler> getSeferAndBiletFiyat(@RequestBody Map<String, Object> seferKriter){
+        String nereden = (String) seferKriter.get("nereden");
+        String nereye = (String) seferKriter.get("nereye");
+        LocalDate tarih = LocalDate.parse((String) seferKriter.get("tarih"));
+
+        return seferService.getSeferAndBiletFiyat(nereden, nereye, tarih);
+    }*/
 }
