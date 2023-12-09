@@ -72,17 +72,15 @@ export default {
           console.error('Error fetching data:', error);
         });
     },
-    searchTicket() {
-      const postData = {
-          from: this.from,
-          to: this.to,
-          date: this.date,
-        };
-
-        this.$router.push({
-        name: 'seferler',
-        params: postData,
-      });
+    async searchTicket() {
+      this.$router.push({ 
+  name: 'seferler', 
+  params: { 
+    from: this.from,
+    to: this.to,
+    date: this.date
+  }
+});
 
     },
     switchCities() {
