@@ -92,4 +92,8 @@ public class BiletService {
         }
 
     }
+
+    /*public List<Integer> getBiletFiyat(Long seferId) {
+        return biletRepository.getBiletFiyat(seferId);
+    }*/
 }

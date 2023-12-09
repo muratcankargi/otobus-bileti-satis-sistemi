@@ -11,4 +11,8 @@ public interface BiletRepository extends JpaRepository<Biletler, Long> {
             " b.seferId = :seferId AND b.KoltukNo = :koltukNo")
     boolean existsBySeferIdAndKoltukNo(Long seferId, Integer koltukNo);
 
+    /*@Query("SELECT AVG(b.BiletFiyat) AS Ortalama_Fiyat\n" +
+            "FROM Biletler b WHERE b.seferId = :Sefer_id")
+    List<Integer> getBiletFiyat(
+            @Param("Sefer_id") Long seferId);*/
 }
