@@ -80,4 +80,8 @@ public class OtobusService {
             otobus.setModelYili(updateOtobus.getModelYili());
         }
     }
+
+    public List<Otobusler> getOtobusBySeferId(Long seferId) {
+        return otobusRepository.getOtobusBySeferId(seferId);
+    }
 }

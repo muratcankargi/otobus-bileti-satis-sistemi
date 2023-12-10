@@ -62,4 +62,8 @@ public class YolcuService {
         }
 
     }
+
+    public List<Yolcular> getYolcuByEmail(String email) {
+       return yolcuRepository.getYolcuByEmail(email);
+    }
 }

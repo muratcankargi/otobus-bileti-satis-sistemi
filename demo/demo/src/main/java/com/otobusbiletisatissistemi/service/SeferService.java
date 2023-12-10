@@ -1,5 +1,7 @@
 package com.otobusbiletisatissistemi.service;
 
+import com.otobusbiletisatissistemi.dto.SeferBiletDTO;
+import com.otobusbiletisatissistemi.entities.Biletler;
 import com.otobusbiletisatissistemi.entities.Firmalar;
 import com.otobusbiletisatissistemi.entities.Seferler;
 import com.otobusbiletisatissistemi.repositories.FirmaRepository;
@@ -12,10 +14,7 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
-import java.util.Date;
-import java.util.List;
-import java.util.Objects;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 public class SeferService {
@@ -41,11 +40,11 @@ public class SeferService {
         }
 
         Optional<Firmalar> firma = firmaRepository.findById(sefer.getFirmaId());
-        if (firma.isPresent()) {
-                sefer.setFirma(firma.get());
+        if (firma.isEmpty()) {
+            throw new IllegalStateException("no firma");
         }
-
-        seferRepository.save(sefer);
+        seferRepository.createSefer(sefer.getOtobusId(), sefer.getFirmaId(), sefer.getSeferKalkisYeri(),
+                sefer.getSeferVarisYeri(), sefer.getSeferKalkisSaati(), sefer.getSeferVarisSaati());
     }
 
     public void deleteSefer(Long seferId) {
@@ -101,12 +100,14 @@ public class SeferService {
     public List<Seferler> getSeferlerByKriter(String nereden, String nereye, LocalDate tarih) {
         LocalDateTime startOfDay = LocalDateTime.of(tarih, LocalTime.MIN);
         LocalDateTime endOfDay = LocalDateTime.of(tarih, LocalTime.MAX);
-            return seferRepository.getSeferlerByKriter(nereden,nereye,startOfDay, endOfDay);
+        return seferRepository.getSeferlerByKriter(nereden, nereye, startOfDay, endOfDay);
     }
 
-   /* public List<Seferler> getSeferAndBiletFiyat(String nereden, String nereye, LocalDate tarih) {
-        LocalDateTime dateTime = LocalDateTime.of(tarih, LocalTime.MIN);
-        return seferRepository.getSeferAndBiletFiyat(nereden,nereye,dateTime);
 
-    }*/
+    public List<Object> getSeferAndBiletFiyat(String nereden, String nereye, LocalDate tarih) {
+        LocalDateTime startOfDay = LocalDateTime.of(tarih, LocalTime.MIN);
+        LocalDateTime endOfDay = LocalDateTime.of(tarih, LocalTime.MAX);
+        return seferRepository.getSeferAndBiletFiyat(nereden, nereye, startOfDay, endOfDay);
+
+    }
 }
