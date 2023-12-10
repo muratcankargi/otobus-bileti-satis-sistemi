@@ -1,6 +1,5 @@
 package com.otobusbiletisatissistemi.entities;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 

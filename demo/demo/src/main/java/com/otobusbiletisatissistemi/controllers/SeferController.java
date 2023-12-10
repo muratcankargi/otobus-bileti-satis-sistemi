@@ -41,8 +41,15 @@ public class SeferController {
 
     @PutMapping(path = "{seferId}")
     public void updateSefer(@PathVariable("seferId") Long seferId,
-                            @RequestBody Seferler sefer) {
-        seferService.updateSefer(seferId, sefer);
+                            @RequestBody Map<String, Object> seferKriter) {
+        Long firmaId = ((Number) seferKriter.get("firmaId")).longValue();
+        Long otobusId = ((Number) seferKriter.get("otobusId")).longValue();
+
+        String seferKalkisYeri = (String) seferKriter.get("seferKalkisYeri");
+        String seferVarisYeri = (String) seferKriter.get("seferVarisYeri");
+        String seferKalkisSaati = (String) seferKriter.get("seferKalkisSaati");
+        String seferVarisSaati = (String) seferKriter.get("seferVarisSaati");
+        seferService.updateSefer(seferId, firmaId,otobusId,seferKalkisYeri,seferVarisYeri,seferKalkisSaati,seferVarisSaati);
     }
 
     @GetMapping("/nereden")

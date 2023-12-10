@@ -1,7 +1,5 @@
 package com.otobusbiletisatissistemi.service;
 
-import com.otobusbiletisatissistemi.dto.SeferBiletDTO;
-import com.otobusbiletisatissistemi.entities.Biletler;
 import com.otobusbiletisatissistemi.entities.Firmalar;
 import com.otobusbiletisatissistemi.entities.Seferler;
 import com.otobusbiletisatissistemi.repositories.FirmaRepository;
@@ -57,42 +55,45 @@ public class SeferService {
     }
 
     @Transactional
-    public void updateSefer(Long seferId, Seferler updateSefer) {
+    public void updateSefer(Long seferId, Long firmaId, Long otobusId, String seferKalkisYeri, String seferVarisYeri,
+                            String seferKalkisSaati, String seferVarisSaati) {
         Seferler sefer = seferRepository.findById(seferId).orElseThrow(
                 () -> new IllegalStateException("sefer id " + seferId + "does not exist"));
 
-        boolean otobusExist = otobusRepository.existsById(updateSefer.getOtobusId());
+        boolean otobusExist = otobusRepository.existsById(otobusId);
         if (!otobusExist) {
-            throw new IllegalStateException("otobus id " + updateSefer.getOtobusId() + "not exist");
+            throw new IllegalStateException("otobus id " + otobusId + "not exist");
         } else {
-            sefer.setOtobusId(updateSefer.getOtobusId());
+            sefer.setOtobusId(otobusId);
         }
 
-        /*boolean firmaExist = firmaRepository.existsById(updateSefer.getFirmaId());
+        boolean firmaExist = firmaRepository.existsById(firmaId);
         if (!firmaExist) {
-            throw new IllegalStateException("firma id " + updateSefer.getFirmaId() + "not exist");
+            throw new IllegalStateException("firma id " + firmaId + "not exist");
         } else {
-            sefer.setFirmaId(updateSefer.getFirmaId());
-        }*/
-
-        if (updateSefer.getSeferKalkisYeri() != null && !updateSefer.getSeferKalkisYeri().isEmpty() &&
-                !Objects.equals(sefer.getSeferKalkisYeri(), updateSefer.getSeferVarisYeri())) {
-            sefer.setSeferKalkisYeri(updateSefer.getSeferKalkisYeri());
+            System.out.println(firmaId);
+            Firmalar firma = firmaRepository.findById(firmaId).get();
+            sefer.setFirma(firma);
         }
 
-        if (updateSefer.getSeferVarisYeri() != null && !updateSefer.getSeferVarisYeri().isEmpty() &&
-                !Objects.equals(sefer.getSeferVarisYeri(), updateSefer.getSeferVarisYeri())) {
-            sefer.setSeferVarisYeri(updateSefer.getSeferVarisYeri());
+        if (seferKalkisYeri != null && !seferKalkisYeri.isEmpty() &&
+                !Objects.equals(sefer.getSeferKalkisYeri(), seferKalkisYeri)) {
+            sefer.setSeferKalkisYeri(seferKalkisYeri);
         }
 
-        if (updateSefer.getSeferKalkisSaati() != null &&
-                !Objects.equals(sefer.getSeferKalkisSaati(), updateSefer.getSeferKalkisSaati())) {
-            sefer.setSeferKalkisSaati(updateSefer.getSeferKalkisSaati());
+        if (seferVarisYeri != null && !seferVarisYeri.isEmpty() &&
+                !Objects.equals(sefer.getSeferVarisYeri(), seferVarisYeri)) {
+            sefer.setSeferVarisYeri(seferVarisYeri);
         }
 
-        if (updateSefer.getSeferVarisSaati() != null &&
-                !Objects.equals(sefer.getSeferVarisSaati(), updateSefer.getSeferVarisSaati())) {
-            sefer.setSeferVarisSaati(updateSefer.getSeferVarisSaati());
+        if (seferKalkisSaati != null &&
+                !Objects.equals(sefer.getSeferKalkisSaati(), seferKalkisSaati)) {
+            sefer.setSeferKalkisSaati(LocalDateTime.parse(seferKalkisSaati));
+        }
+
+        if (seferVarisSaati != null &&
+                !Objects.equals(sefer.getSeferVarisSaati(), seferVarisSaati)) {
+            sefer.setSeferVarisSaati(LocalDateTime.parse(seferVarisSaati));
         }
 
     }
@@ -110,4 +111,6 @@ public class SeferService {
         return seferRepository.getSeferAndBiletFiyat(nereden, nereye, startOfDay, endOfDay);
 
     }
+
+
 }
