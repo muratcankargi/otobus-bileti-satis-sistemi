@@ -67,6 +67,11 @@
     </div>
 
   </div>
+  <transition name="fade">
+    <div v-if="successfullBiletBuy" class="fixed bottom-5 right-5 bg-green-500 text-white p-4 rounded shadow">
+      Bilet satın alındı!
+    </div>
+  </transition>
 </template>
 
 <script>
@@ -95,6 +100,7 @@ export default {
         email: '',
         phoneNumber: '',
       },
+      successfullBiletBuy: false,
     };
   },
   methods: {
@@ -130,8 +136,8 @@ export default {
         }).catch(error => {
           console.error("Kaydedilemedi");
         });
-      const getYolcuId = await axios.post("http://localhost:8080/api/yolcular/getYolcuByEmail", 
-      { "email": this.contactInfo.email })
+      const getYolcuId = await axios.post("http://localhost:8080/api/yolcular/getYolcuByEmail",
+        { "email": this.contactInfo.email })
 
       const yolcuId = getYolcuId.data[0].id;
       const seferNo = this.searchData.seferNo;
@@ -146,7 +152,10 @@ export default {
 
       await axios.post("http://localhost:8080/api/biletler", biletData)
         .then(request => {
-          console.log("Bilet Kaydedildi!");
+          this.successfullBiletBuy = true;
+          setTimeout(() => {
+            this.successfullBiletBuy = false;
+          }, 2000);
         })
         .catch(error => {
           console.error("Bilet Kaydedilemedi!");
