@@ -46,7 +46,7 @@
 
     </div>
   </div>
-  <transition name="fade" @after-leave="resetSeferKaydi">
+  <transition name="fade">
     <div v-if="seferKaydiOlusturuldu" class="fixed bottom-5 right-5 bg-green-500 text-white p-4 rounded shadow">
       Sefer kaydı başarıyla oluşturuldu!
     </div>
