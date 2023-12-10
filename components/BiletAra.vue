@@ -1,31 +1,36 @@
 <template>
-  <div class="flex items-start justify-start h-screen p-4">
-    <div class="w-full max-w-md">
-      <div class="mb-4 flex items-center">
-        <label for="from" class="mr-2 text-sm font-medium text-gray-600">Nereden:</label>
-        <select v-model="from" id="from" name="from" class="p-2 border border-gray-300 rounded-md">
+  <div class="flex items-center justify-center h-screen">
+    <div class="max-w-md p-4">
+      <h1 class="text-2xl font-bold mb-4">Şehirler Arası Otobüs Bilet Sistemi</h1>
+
+      <div class="mb-4">
+        <label for="from" class="block text-l font-medium text-gray-600">Nereden:</label>
+        <select v-model="from" id="from" name="from" class="mt-1 p-2 border border-gray-300 rounded-md w-full">
           <option value="" disabled selected>Lütfen seçiniz</option>
           <option v-for="city in fromCities" :key="city" :value="city">{{ city.Sehir }}</option>
         </select>
       </div>
-
-      <div class="flex items-center mb-4">
-        <label for="to" class="mr-2 text-sm font-medium text-gray-600">Nereye:</label>
-        <select v-model="to" id="to" name="to" class="p-2 border border-gray-300 rounded-md">
+      <div class="mb-4 flex justify-center">
+        <button @click="switchCities" class="bg-blue-500 text-white p-2 rounded-md">
+          <svg fill="#131717" width="20" height="20" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path d="M6.99 11L3 15l3.99 4v-3H14v-2H6.99v-3zM21 9l-3.99-4v3H10v2h7.01v3L21 9z"></path>
+          </svg>
+        </button>
+      </div>
+      <div class="mb-4">
+        <label for="to" class="block text-l font-medium text-gray-600">Nereye:</label>
+        <select v-model="to" id="to" name="to" class="mt-1 p-2 border border-gray-300 rounded-md w-full">
           <option value="" disabled selected>Lütfen seçiniz</option>
           <option v-for="city in toCities" :key="city" :value="city">{{ city.Sehir }}</option>
         </select>
       </div>
-
-      <div class="flex items-center mb-4">
-        <label for="date" class="mr-2 text-sm font-medium text-gray-600">Tarih:</label>
-        <input v-model="date" type="date" id="date" name="date" class="p-2 border border-gray-300 rounded-md" 
-        :min="today" :disabledDates="disabledDates">
+      <div class="mb-4">
+        <label for="date" class="block text-l font-medium text-gray-600">Tarih:</label>
+        <input v-model="date" type="date" id="date" name="date" class="mt-1 p-2 border border-gray-300 rounded-md w-full"
+          :min="today" :disabledDates="disabledDates">
       </div>
 
-      <div class="flex items-center">
-        <button @click="searchTicket" class="bg-blue-500 text-white p-2 rounded-md">Bilet Ara</button>
-      </div>
+      <button @click="searchTicket" class="bg-blue-500 text-white p-2 rounded-md w-full">Bilet Ara</button>
     </div>
   </div>
 </template>
@@ -36,8 +41,7 @@ import axios from 'axios';
 export default {
   mounted() {
     this.fetchData();
-    this.from = 'İstanbul';
-    this.to = 'Ankara';
+
     this.date = this.today;
 
   },
@@ -48,7 +52,7 @@ export default {
       to: '',
       date: '',
       fromCities: [],
-      toCities:[],
+      toCities: [],
       disabledDates: {
         to: new Date().toISOString().split('T')[0]
       }
@@ -64,23 +68,28 @@ export default {
           console.error('Error fetching data:', error);
         });
 
-        await axios.get('http://localhost:8080/api/seferler/nereye')
+      await axios.get('http://localhost:8080/api/seferler/nereye')
         .then(response => {
           this.toCities = response.data;
         })
         .catch(error => {
           console.error('Error fetching data:', error);
         });
+
+      this.from = this.fromCities.find(city => city.Sehir === 'İstanbul');
+      this.to = this.toCities.find(city => city.Sehir === 'Ankara');
+
     },
-    async searchTicket() {
-      this.$router.push({ 
-  name: 'seferler', 
-  params: { 
-    from: this.from,
-    to: this.to,
-    date: this.date
-  }
-});
+
+    searchTicket() {
+      this.$router.push({
+        name: 'seferler',
+        query: {
+          from: this.from.Sehir,
+          to: this.to.Sehir,
+          date: this.date
+        }
+      });
 
     },
     switchCities() {
@@ -88,10 +97,9 @@ export default {
       this.from = this.to;
       this.to = temp;
     },
-    
+
   }
 };
 </script>
 
-<style scoped>
-</style>
+<style scoped></style>
