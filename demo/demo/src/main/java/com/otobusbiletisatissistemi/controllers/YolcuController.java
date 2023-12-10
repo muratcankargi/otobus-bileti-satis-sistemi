@@ -6,7 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
+@CrossOrigin
 @RestController
 @RequestMapping("/api/yolcular")
 public class YolcuController {
@@ -39,5 +41,11 @@ public class YolcuController {
                             @RequestParam(required = false) String soyad,
                             @RequestParam(required = false) String email) {
         yolcuService.updateYolcu(yolcuId, ad, soyad, email);
+    }
+
+    @PostMapping("/getYolcuByEmail")
+    public List<Yolcular> getYolcuByEmail(@RequestBody Map<String, Object> seferKriter){
+        String email= (String) seferKriter.get("email");
+        return yolcuService.getYolcuByEmail(email);
     }
 }
