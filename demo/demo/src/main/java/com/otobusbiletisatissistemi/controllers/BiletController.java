@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+@CrossOrigin
 @RestController
 @RequestMapping("/api/biletler")
 public class BiletController {
@@ -36,10 +37,4 @@ public class BiletController {
                             @RequestBody Biletler bilet) {
         biletService.updateBilet(biletId, bilet);
     }
-    /*@CrossOrigin
-    @PostMapping(path = "/biletFiyat/{seferId}")
-    public List<Integer> biletFiyat(@PathVariable("seferId") Long seferId) {
-        return biletService.getBiletFiyat(seferId);
-    }*/
-
 }
