@@ -21,7 +21,9 @@
   "dependencies": {
     "axios": "^1.6.2",
     "cors": "^2.8.5",
+    "flatpickr": "^4.6.13",
     "nuxt3-vuex-module": "^1.0.14",
+    "vue-flatpickr-component": "^11.0.3",
     "vuex": "^4.1.0"
   }
 }
