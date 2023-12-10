@@ -20,7 +20,6 @@ public class Seferler {
     @ManyToOne
     private Firmalar firma;
     @Transient
-    @JsonIgnore
     private Long firmaId;
     private Long otobusId;
 
