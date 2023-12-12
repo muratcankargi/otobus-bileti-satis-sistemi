@@ -44,7 +44,8 @@ public class BiletService {
             throw new IllegalStateException("This seat number is already taken.");
         }
 
-        biletRepository.save(bilet);
+        biletRepository.createBilet(bilet.getYolcuId(),bilet.getSeferId(), bilet.getKoltukNo(),bilet.getBiletFiyat(),
+                bilet.getSatisTarihi());
 
     }
 
