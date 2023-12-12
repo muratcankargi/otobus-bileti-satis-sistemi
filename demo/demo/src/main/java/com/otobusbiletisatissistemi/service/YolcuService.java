@@ -28,7 +28,9 @@ public class YolcuService {
         if (studentOptional.isPresent()) {
             throw new IllegalStateException("email taken");
         }
-        yolcuRepository.save(yolcu);
+
+        yolcuRepository.createYolcu(yolcu.getAd(), yolcu.getSoyad(), yolcu.getTckimlikNo(), yolcu.getEmail(),
+                yolcu.getCinsiyet());
     }
 
     public void deleteYolcu(Long yolcuId) {
