@@ -1,7 +1,7 @@
 package com.otobusbiletisatissistemi.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-
 
 import java.time.LocalDateTime;
 
@@ -16,10 +16,11 @@ public class Seferler {
     private String seferVarisYeri;
     private LocalDateTime seferKalkisSaati;
     private LocalDateTime seferVarisSaati;
+
     @ManyToOne
+    @JoinColumn(name = "firma_id") // Eşleştirme alanının adı
     private Firmalar firma;
-    @Transient
-    private Long firmaId;
+
     private Long otobusId;
 
     public Seferler() {
@@ -79,13 +80,5 @@ public class Seferler {
 
     public void setFirma(Firmalar firma) {
         this.firma = firma;
-    }
-
-    public Long getFirmaId() {
-        return firmaId;
-    }
-
-    public void setFirmaId(Long firmaId) {
-        this.firmaId = firmaId;
     }
 }
