@@ -1,12 +1,17 @@
 package com.otobusbiletisatissistemi.controllers;
 
+import com.otobusbiletisatissistemi.Dto.SeferDto;
+import com.otobusbiletisatissistemi.entities.Firmalar;
+import com.otobusbiletisatissistemi.entities.Otobusler;
 import com.otobusbiletisatissistemi.entities.Seferler;
 import com.otobusbiletisatissistemi.service.SeferService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Map;
 
@@ -30,8 +35,27 @@ public class SeferController {
     }
 
     @PostMapping
-    public void createSefer(@RequestBody Seferler sefer) {
+    public ResponseEntity<String> createSefer(@RequestBody SeferDto seferDto) {
+        Seferler sefer = convertToEntity(seferDto);
         seferService.createSefer(sefer);
+        return ResponseEntity.ok("Sefer başarıyla kaydedildi.");
+    }
+    private Seferler convertToEntity(SeferDto seferDto) {
+        Seferler sefer = new Seferler();
+        sefer.setSeferKalkisYeri(seferDto.getSeferKalkisYeri());
+        sefer.setSeferVarisYeri(seferDto.getSeferVarisYeri());
+        sefer.setSeferKalkisSaati((seferDto.getSeferKalkisSaati()));
+        sefer.setSeferVarisSaati((seferDto.getSeferVarisSaati()));
+
+        Firmalar firma = new Firmalar();
+        firma.setId(seferDto.getFirmaId());
+        sefer.setFirma(firma);
+
+        Otobusler otobus = new Otobusler();
+        otobus.setId(seferDto.getOtobusId());
+        sefer.setOtobusId(seferDto.getOtobusId());
+
+        return sefer;
     }
 
     @DeleteMapping(path = "{seferId}")
