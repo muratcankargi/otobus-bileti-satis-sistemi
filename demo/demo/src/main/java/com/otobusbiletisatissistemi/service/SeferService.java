@@ -1,7 +1,9 @@
 package com.otobusbiletisatissistemi.service;
 
+import com.otobusbiletisatissistemi.entities.Biletler;
 import com.otobusbiletisatissistemi.entities.Firmalar;
 import com.otobusbiletisatissistemi.entities.Seferler;
+import com.otobusbiletisatissistemi.repositories.BiletRepository;
 import com.otobusbiletisatissistemi.repositories.FirmaRepository;
 import com.otobusbiletisatissistemi.repositories.OtobusRepository;
 import com.otobusbiletisatissistemi.repositories.SeferRepository;
@@ -9,9 +11,8 @@ import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.LocalTime;
+import java.sql.Date;
+import java.time.*;
 import java.util.*;
 
 @Service
@@ -19,12 +20,13 @@ public class SeferService {
     private final SeferRepository seferRepository;
     private final OtobusRepository otobusRepository;
     private final FirmaRepository firmaRepository;
-
+    private final BiletRepository biletRepository;
     @Autowired
-    public SeferService(SeferRepository seferRepository, OtobusRepository otobusRepository, FirmaRepository firmaRepository) {
+    public SeferService(SeferRepository seferRepository, OtobusRepository otobusRepository, FirmaRepository firmaRepository, BiletRepository biletRepository) {
         this.seferRepository = seferRepository;
         this.otobusRepository = otobusRepository;
         this.firmaRepository = firmaRepository;
+        this.biletRepository = biletRepository;
     }
 
     public List<Seferler> getSefer() {
@@ -37,14 +39,22 @@ public class SeferService {
             throw new IllegalStateException("otobus id " + sefer.getOtobusId() + "not exist");
         }
 
-        Optional<Firmalar> firma = firmaRepository.findById(sefer.getFirmaId());
+        /*Optional<Firmalar> firma = firmaRepository.findById(sefer.());
         if (firma.isEmpty()) {
             throw new IllegalStateException("no firma");
-        }
-        seferRepository.createSefer(sefer.getOtobusId(), sefer.getFirmaId(), sefer.getSeferKalkisYeri(),
-                sefer.getSeferVarisYeri(), sefer.getSeferKalkisSaati(), sefer.getSeferVarisSaati());
+        }*/
+        Seferler savedSefer = seferRepository.save(sefer);
+        createBilet(savedSefer.getSeferNo());
     }
-
+public void createBilet(Long seferId){
+    Biletler bilet = new Biletler();
+    bilet.setSeferId(seferId);
+    bilet.setSatisTarihi(Date.valueOf(LocalDate.now()));
+    bilet.setBiletFiyat((int) (Math.random()*20)*10+100); //100 - 300 arası sayı üretir.
+    bilet.setYolcuId(1L);
+    bilet.setKoltukNo(0);
+    biletRepository.save(bilet);
+}
     public void deleteSefer(Long seferId) {
         boolean exist = seferRepository.existsById(seferId);
         if (!exist) {
