@@ -33,7 +33,7 @@ public class YolcuService {
                 yolcu.getCinsiyet());
     }
 
-    public void deleteYolcu(Long yolcuId) {
+    public void deleteYolcu(Long yolcuId) { 
         boolean exist = yolcuRepository.existsById(yolcuId);
         if (!exist) {
             throw new IllegalStateException("yolcu with id " + yolcuId + " does not exists");
