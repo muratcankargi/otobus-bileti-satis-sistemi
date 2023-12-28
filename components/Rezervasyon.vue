@@ -56,11 +56,11 @@
       <h2 class="text-xl font-bold mb-2">Otobüs Kalkış Yeri ve Tarihi </h2>
       <p class="text-lg font-semibold text-gray-800">{{ this.searchData.nereden + " / " +
         formatDate(this.searchData.seferKalkisTarihi) }}</p>
-      <h2 class="text-xl font-bold mb-2">Sefer No: {{ this.searchData.seferNo }} Koltuk No: {{ this.searchData.koltukNo }}
-      </h2>
-      <h2 class="text-xl font-bold mb-2">Otobüs Varış Veri ve Tarihi</h2>
+      <h2 class="text-xl font-bold mb-2">Otobüs Varış Yeri ve Tarihi</h2>
       <p class="text-lg font-semibold text-gray-800">{{ this.searchData.nereye + " / " +
         formatDate(this.searchData.seferVarisTarihi) }}</p>
+        <h2 class="text-xl font-bold mb-2">Sefer No: {{ this.searchData.seferNo }} Koltuk No: {{ this.searchData.koltukNo }}
+      </h2>
       <h2 class="text-xl font-bold mb-2">Bilet Fiyat : {{ this.searchData.biletFiyat }}₺</h2>
 
       <button @click="buyTicket" class="bg-blue-500 text-white p-2 rounded-md w-full">Bilet Satın Al</button>
