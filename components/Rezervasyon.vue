@@ -105,14 +105,14 @@ export default {
   },
   methods: {
     validateTCNumber() {
-      this.ticketInfo.tcNumber = this.ticketInfo.tcNumber.replace(/\D/g, ''); // just numeric input
+      this.ticketInfo.tcNumber = this.ticketInfo.tcNumber.replace(/\D/g, '');
 
       if (this.ticketInfo.tcNumber.length > 11) {
-        this.ticketInfo.tcNumber = this.ticketInfo.tcNumber.slice(0, 11); // max length 11
+        this.ticketInfo.tcNumber = this.ticketInfo.tcNumber.slice(0, 11);
       }
     },
     formatPhoneNumber() {
-      const enteredValue = this.contactInfo.phoneNumber.replace(/\D/g, ''); // Remove non-numeric characters
+      const enteredValue = this.contactInfo.phoneNumber.replace(/\D/g, '');
       const formattedValue = enteredValue.replace(/(\d{1})(\d{3})(\d{3})(\d{2})(\d{2})/, '($1$2) $3 $4 $5');
       this.contactInfo.phoneNumber = formattedValue.slice(0, 15);
     },
