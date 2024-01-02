@@ -22,7 +22,7 @@ public interface SeferRepository extends JpaRepository<Seferler, Long> {
             @Param("endDate") LocalDateTime endOfDay
     );
 
-    @Query("SELECT s.firma.firmaAdi, s.seferKalkisYeri,s.seferVarisYeri, s.seferKalkisSaati,s.seferVarisSaati,AVG(b.BiletFiyat),s.seferNo,MAX(b.KoltukNo)\n" +
+    @Query("SELECT s.firma.firmaAdi, s.seferKalkisYeri,s.seferVarisYeri, s.seferKalkisSaati,s.seferVarisSaati,AVG(b.BiletFiyat),s.seferNo,MAX(b.KoltukNo)" +
             "FROM Biletler b\n" +
             "JOIN Seferler s ON b.seferId = s.seferNo\n" +
             "WHERE s.seferKalkisYeri = :nereden \n" +
