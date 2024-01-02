@@ -12,10 +12,9 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 @Repository
-public interface SeferRepository extends JpaRepository<Seferler,Long> {
+public interface SeferRepository extends JpaRepository<Seferler, Long> {
     @Query("SELECT s FROM Seferler s WHERE s.seferKalkisYeri = :nereden AND s.seferVarisYeri = :nereye " +
             "AND s.seferKalkisSaati >= :startDate AND s.seferKalkisSaati <= :endDate")
-
     List<Seferler> getSeferlerByKriter(
             @Param("nereden") String nereden,
             @Param("nereye") String nereye,
@@ -43,6 +42,7 @@ public interface SeferRepository extends JpaRepository<Seferler,Long> {
             @Param("startOfDay") LocalDateTime startOfDay,
             @Param("endOfDay") LocalDateTime endOfDay
     );
+
     @Modifying
     @Transactional
     @Query(value = "INSERT INTO Seferler (firma_id, otobus_id, sefer_kalkis_yeri, sefer_varis_yeri, sefer_kalkis_saati, " +

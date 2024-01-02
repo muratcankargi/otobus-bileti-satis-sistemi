@@ -5,8 +5,7 @@ import com.otobusbiletisatissistemi.service.YolcuService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @CrossOrigin
 @RestController
@@ -44,8 +43,8 @@ public class YolcuController {
     }
 
     @PostMapping("/getYolcuByEmail")
-    public List<Yolcular> getYolcuByEmail(@RequestBody Map<String, Object> seferKriter){
-        String email= (String) seferKriter.get("email");
+    public List<Yolcular> getYolcuByEmail(@RequestBody Map<String, Object> seferKriter) {
+        String email = (String) seferKriter.get("email");
         return yolcuService.getYolcuByEmail(email);
     }
 }

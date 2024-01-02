@@ -6,9 +6,7 @@ import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-import java.util.Objects;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 public class YolcuService {
@@ -33,7 +31,7 @@ public class YolcuService {
                 yolcu.getCinsiyet());
     }
 
-    public void deleteYolcu(Long yolcuId) { 
+    public void deleteYolcu(Long yolcuId) {
         boolean exist = yolcuRepository.existsById(yolcuId);
         if (!exist) {
             throw new IllegalStateException("yolcu with id " + yolcuId + " does not exists");
@@ -66,6 +64,6 @@ public class YolcuService {
     }
 
     public List<Yolcular> getYolcuByEmail(String email) {
-       return yolcuRepository.getYolcuByEmail(email);
+        return yolcuRepository.getYolcuByEmail(email);
     }
 }

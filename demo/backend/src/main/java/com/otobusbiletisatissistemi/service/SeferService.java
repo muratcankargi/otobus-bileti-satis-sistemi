@@ -21,6 +21,7 @@ public class SeferService {
     private final OtobusRepository otobusRepository;
     private final FirmaRepository firmaRepository;
     private final BiletRepository biletRepository;
+
     @Autowired
     public SeferService(SeferRepository seferRepository, OtobusRepository otobusRepository, FirmaRepository firmaRepository, BiletRepository biletRepository) {
         this.seferRepository = seferRepository;
@@ -46,15 +47,17 @@ public class SeferService {
         Seferler savedSefer = seferRepository.save(sefer);
         createBilet(savedSefer.getSeferNo());
     }
-public void createBilet(Long seferId){
-    Biletler bilet = new Biletler();
-    bilet.setSeferId(seferId);
-    bilet.setSatisTarihi(Date.valueOf(LocalDate.now()));
-    bilet.setBiletFiyat((int) (Math.random()*20)*10+100); //100 - 300 arası sayı üretir.
-    bilet.setYolcuId(1L);
-    bilet.setKoltukNo(0);
-    biletRepository.save(bilet);
-}
+
+    public void createBilet(Long seferId) {
+        Biletler bilet = new Biletler();
+        bilet.setSeferId(seferId);
+        bilet.setSatisTarihi(Date.valueOf(LocalDate.now()));
+        bilet.setBiletFiyat((int) (Math.random() * 20) * 10 + 100); //100 - 300 arası sayı üretir.
+        bilet.setYolcuId(1L);
+        bilet.setKoltukNo(0);
+        biletRepository.save(bilet);
+    }
+
     public void deleteSefer(Long seferId) {
         boolean exist = seferRepository.existsById(seferId);
         if (!exist) {

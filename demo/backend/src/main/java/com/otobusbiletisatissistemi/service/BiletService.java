@@ -8,8 +8,7 @@ import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 @Service
 public class BiletService {
@@ -44,7 +43,7 @@ public class BiletService {
             throw new IllegalStateException("This seat number is already taken.");
         }
 
-        biletRepository.createBilet(bilet.getYolcuId(),bilet.getSeferId(), bilet.getKoltukNo(),bilet.getBiletFiyat(),
+        biletRepository.createBilet(bilet.getYolcuId(), bilet.getSeferId(), bilet.getKoltukNo(), bilet.getBiletFiyat(),
                 bilet.getSatisTarihi());
 
     }

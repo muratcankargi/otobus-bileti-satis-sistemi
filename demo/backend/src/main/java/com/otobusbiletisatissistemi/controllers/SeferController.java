@@ -40,6 +40,7 @@ public class SeferController {
         seferService.createSefer(sefer);
         return ResponseEntity.ok("Sefer başarıyla kaydedildi.");
     }
+
     private Seferler convertToEntity(SeferDto seferDto) {
         Seferler sefer = new Seferler();
         sefer.setSeferKalkisYeri(seferDto.getSeferKalkisYeri());
@@ -73,7 +74,7 @@ public class SeferController {
         String seferVarisYeri = (String) seferKriter.get("seferVarisYeri");
         String seferKalkisSaati = (String) seferKriter.get("seferKalkisSaati");
         String seferVarisSaati = (String) seferKriter.get("seferVarisSaati");
-        seferService.updateSefer(seferId, firmaId,otobusId,seferKalkisYeri,seferVarisYeri,seferKalkisSaati,seferVarisSaati);
+        seferService.updateSefer(seferId, firmaId, otobusId, seferKalkisYeri, seferVarisYeri, seferKalkisSaati, seferVarisSaati);
     }
 
     @GetMapping("/nereden")

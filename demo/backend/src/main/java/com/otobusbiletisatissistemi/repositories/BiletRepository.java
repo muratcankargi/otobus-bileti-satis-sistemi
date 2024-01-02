@@ -1,7 +1,6 @@
 package com.otobusbiletisatissistemi.repositories;
 
 import com.otobusbiletisatissistemi.entities.Biletler;
-import com.otobusbiletisatissistemi.entities.Seferler;
 import jakarta.transaction.Transactional;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;

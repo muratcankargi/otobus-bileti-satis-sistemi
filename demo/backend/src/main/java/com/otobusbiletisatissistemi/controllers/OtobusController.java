@@ -5,6 +5,7 @@ import com.otobusbiletisatissistemi.service.OtobusService;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+
 @CrossOrigin
 @RestController
 @RequestMapping("/api/otobusler")
@@ -37,7 +38,7 @@ public class OtobusController {
     }
 
     @PostMapping(path = {"getOtobusBySeferId/{seferId}"})
-    public List<Otobusler> getOtobusBySeferId(@PathVariable("seferId") Long seferId){
+    public List<Otobusler> getOtobusBySeferId(@PathVariable("seferId") Long seferId) {
         return otobusService.getOtobusBySeferId(seferId);
     }
 }
